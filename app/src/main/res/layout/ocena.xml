@@ -18,41 +18,40 @@
         android:orientation="horizontal">
 
 
+        <RadioButton
+            android:id="@+id/ocena1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="1" />
 
-            <RadioButton
-                android:id="@+id/ocena1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="1" />
+        <RadioButton
+            android:id="@+id/ocena2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="2" />
 
-            <RadioButton
-                android:id="@+id/ocena2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="2" />
+        <RadioButton
+            android:id="@+id/ocena3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="3" />
 
-            <RadioButton
-                android:id="@+id/ocena3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="3" />
+        <RadioButton
+            android:id="@+id/ocena4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="4" />
 
-            <RadioButton
-                android:id="@+id/ocena4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="4" />
-
-            <RadioButton
-                android:id="@+id/ocena5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="5" />
+        <RadioButton
+            android:id="@+id/ocena5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="5" />
 
 
     </RadioGroup>

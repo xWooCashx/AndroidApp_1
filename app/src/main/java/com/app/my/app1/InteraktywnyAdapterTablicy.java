@@ -16,30 +16,28 @@ public class InteraktywnyAdapterTablicy extends ArrayAdapter<ModelOceny> {
     //przechowujemy referencję do listy ocen
     private List<ModelOceny> listaOcen;
     private Activity kontekst;
-    public InteraktywnyAdapterTablicy(Activity kontekst, List<ModelOceny> listaOcen)
-    {
+
+    public InteraktywnyAdapterTablicy(Activity kontekst, List<ModelOceny> listaOcen) {
         super(kontekst, R.layout.ocena, listaOcen);
         //ustawienie wartości pól
         this.kontekst = kontekst;
         this.listaOcen = listaOcen;
     }
+
     //tworzenie nowego wiersza
     @Override
-    public View getView(final int numerWiersza, View widokDoRecyklingu, ViewGroup parent)
-    {
+    public View getView(final int numerWiersza, View widokDoRecyklingu, ViewGroup parent) {
         View widok = null;
         //tworzenie nowego wiersza
-        if (widokDoRecyklingu == null)
-        {
+        if (widokDoRecyklingu == null) {
             //utworzenie layout na podstawie pliku XML
             LayoutInflater pompka = kontekst.getLayoutInflater();
-            widok = pompka.inflate(R.layout.ocena,null);
+            widok = pompka.inflate(R.layout.ocena, null);
             //wybranie konkretnego przycisku radiowego musi zmieniać dane w modelu
             RadioGroup grupaOceny = (RadioGroup) widok.findViewById(R.id.grupaOceny);
             grupaOceny.setTag(listaOcen.get(numerWiersza));
             grupaOceny.setOnCheckedChangeListener(
-                    new RadioGroup.OnCheckedChangeListener()
-                    {
+                    new RadioGroup.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(RadioGroup group, //referencja do grupy
                                                      //przycisków
@@ -51,12 +49,22 @@ public class InteraktywnyAdapterTablicy extends ArrayAdapter<ModelOceny> {
                             ModelOceny element = (ModelOceny) group.getTag();
                             // 2) zapisanie zmienionej oceny
                             //System.out.println(numerWiersza);
-                            switch (checkedId){
-                                case R.id.ocena1: element.setOcena(1); break;
-                                case R.id.ocena2: element.setOcena(2); break;
-                                case R.id.ocena3: element.setOcena(3); break;
-                                case R.id.ocena4: element.setOcena(4); break;
-                                case R.id.ocena5: element.setOcena(5); break;
+                            switch (checkedId) {
+                                case R.id.ocena1:
+                                    element.setOcena(1);
+                                    break;
+                                case R.id.ocena2:
+                                    element.setOcena(2);
+                                    break;
+                                case R.id.ocena3:
+                                    element.setOcena(3);
+                                    break;
+                                case R.id.ocena4:
+                                    element.setOcena(4);
+                                    break;
+                                case R.id.ocena5:
+                                    element.setOcena(5);
+                                    break;
                             }
                             //element.setOcena();
                         }
@@ -64,8 +72,7 @@ public class InteraktywnyAdapterTablicy extends ArrayAdapter<ModelOceny> {
             );
         }
         //aktualizacja istniejącego wiersza
-        else
-        {
+        else {
             widok = widokDoRecyklingu;
             RadioGroup grupaOceny = (RadioGroup) widok.findViewById(R.id.grupaOceny);
             //powiązanie grupy przycisków z obiektem w modelu
@@ -77,12 +84,22 @@ public class InteraktywnyAdapterTablicy extends ArrayAdapter<ModelOceny> {
         //ustawienie tekstu etykiety na podstawie modelu
         RadioGroup grupaOceny = (RadioGroup) widok.findViewById(R.id.grupaOceny);
         //zaznaczenie odpowiedniego przycisku na podtawie modelu
-        switch (listaOcen.get(numerWiersza).getOcena()){
-            case 5: grupaOceny.check(R.id.ocena1); break;
-            case 4: grupaOceny.check(R.id.ocena2); break;
-            case 3: grupaOceny.check(R.id.ocena3); break;
-            case 2: grupaOceny.check(R.id.ocena4);  break;
-            case 1: grupaOceny.check(R.id.ocena5);break;
+        switch (listaOcen.get(numerWiersza).getOcena()) {
+            case 5:
+                grupaOceny.check(R.id.ocena1);
+                break;
+            case 4:
+                grupaOceny.check(R.id.ocena2);
+                break;
+            case 3:
+                grupaOceny.check(R.id.ocena3);
+                break;
+            case 2:
+                grupaOceny.check(R.id.ocena4);
+                break;
+            case 1:
+                grupaOceny.check(R.id.ocena5);
+                break;
         }
 
         //grupaOceny.check(R.id.);

@@ -1,17 +1,19 @@
 package com.app.my.app1;
 
 public class ModelOceny {
-   private String nazwa;
-   private int ocena;
+    private String nazwa;
+    private int ocena;
 
     public ModelOceny(String nazwa, int ocena) {
         this.nazwa = nazwa;
         this.ocena = ocena;
     }
+
     public ModelOceny(String nazwa) {
         this.nazwa = nazwa;
-        this.ocena=0;
+        this.ocena = 0;
     }
+
     public String getNazwa() {
         return nazwa;
     }

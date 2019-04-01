@@ -15,43 +15,44 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    boolean czyImie=false,czyNazwisko=false,czyLiczby=false;
-    EditText imie,nazwisko,liczbaOcen;
+    boolean czyImie = false, czyNazwisko = false, czyLiczby = false;
+    EditText imie, nazwisko, liczbaOcen;
     TextView srednia;
     Button oblicz;
-    protected void pokazOblicz(){
-if(czyImie && czyNazwisko && czyLiczby)
-    oblicz.setVisibility(Button.VISIBLE);
 
-else
-    oblicz.setVisibility(Button.INVISIBLE);
+    protected void pokazOblicz() {
+        if (czyImie && czyNazwisko && czyLiczby)
+            oblicz.setVisibility(Button.VISIBLE);
+
+        else
+            oblicz.setVisibility(Button.INVISIBLE);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-         srednia = findViewById(R.id.srednia);
+        srednia = findViewById(R.id.srednia);
         oblicz = (Button) findViewById(R.id.oblicz);
         oblicz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent zamiar = new Intent(MainActivity.this, Main2Activity.class);
-                zamiar.putExtra("liczbaOcen",Integer.parseInt(liczbaOcen.getText().toString()));
-                startActivityForResult(zamiar,999);
+                zamiar.putExtra("liczbaOcen", Integer.parseInt(liczbaOcen.getText().toString()));
+                startActivityForResult(zamiar, 999);
             }
         });
-         imie = (EditText) findViewById(R.id.imieInput);
-         imie.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-             @Override
-             public void onFocusChange(View v, boolean hasFocus) {
-                 if(imie.getText().toString().isEmpty() && !hasFocus)
-                 {
-                     Toast.makeText(getBaseContext(), "imie nie moze byc puste", Toast.LENGTH_SHORT).show();
-                 }
-             }
-         }
-    );
+        imie = (EditText) findViewById(R.id.imieInput);
+        imie.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                                          @Override
+                                          public void onFocusChange(View v, boolean hasFocus) {
+                                              if (imie.getText().toString().isEmpty() && !hasFocus) {
+                                                  Toast.makeText(getBaseContext(), "imie nie moze byc puste", Toast.LENGTH_SHORT).show();
+                                              }
+                                          }
+                                      }
+        );
         imie.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -66,11 +67,10 @@ else
 
             @Override
             public void afterTextChanged(Editable s) {
-            if(!s.toString().isEmpty())
-            {czyImie=true;
-            }
-            else
-                czyImie=false;
+                if (!s.toString().isEmpty()) {
+                    czyImie = true;
+                } else
+                    czyImie = false;
                 pokazOblicz();
             }
 
@@ -79,8 +79,7 @@ else
         nazwisko.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                                               @Override
                                               public void onFocusChange(View v, boolean hasFocus) {
-                                                  if(nazwisko.getText().toString().isEmpty() && !hasFocus)
-                                                  {
+                                                  if (nazwisko.getText().toString().isEmpty() && !hasFocus) {
                                                       Toast.makeText(getBaseContext(), "nazwisko nie moze byc puste", Toast.LENGTH_SHORT).show();
                                                   }
                                               }
@@ -101,24 +100,23 @@ else
             @Override
             public void afterTextChanged(Editable s) {
                 //s.toString();
-                if(!s.toString().isEmpty())
-                {czyNazwisko=true;}
-                    else
-                        czyNazwisko=false;
+                if (!s.toString().isEmpty()) {
+                    czyNazwisko = true;
+                } else
+                    czyNazwisko = false;
                 pokazOblicz();
             }
 
         });
         liczbaOcen = (EditText) findViewById(R.id.liczbaOcenInput);
         liczbaOcen.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                                                 @Override
-                                                 public void onFocusChange(View v, boolean hasFocus) {
-                                                     if(!czyLiczby && !hasFocus)
-                                                     {
-                                                         Toast.makeText(getBaseContext(), "liczba ocen 5-15", Toast.LENGTH_SHORT).show();
-                                                     }
-                                                 }
-                                             }
+                                                @Override
+                                                public void onFocusChange(View v, boolean hasFocus) {
+                                                    if (!czyLiczby && !hasFocus) {
+                                                        Toast.makeText(getBaseContext(), "liczba ocen 5-15", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            }
         );
         liczbaOcen.addTextChangedListener(new TextWatcher() {
 
@@ -134,18 +132,17 @@ else
 
             @Override
             public void afterTextChanged(Editable s) {
-                int liczba=0;
+                int liczba = 0;
                 try {
                     liczba = Integer.parseInt(liczbaOcen.getText().toString());
+                } catch (Exception e) {
+                    czyLiczby = false;
                 }
-                catch(Exception e){
-                    czyLiczby=false;
-                }
-                if(liczba>=5 && liczba<=15)
-                czyLiczby=true;
-                    else
-                    czyLiczby=false;
-                    pokazOblicz();
+                if (liczba >= 5 && liczba <= 15)
+                    czyLiczby = true;
+                else
+                    czyLiczby = false;
+                pokazOblicz();
 
             }
 
@@ -156,20 +153,20 @@ else
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-if(resultCode==998) {
-    // Bundle tobolek=data.getExtras();
-    //String liczba=tobolek.getString("srednia");  //można przekazać więcej niż
-    // 1 element
-    System.out.println("fhfghf");
-     srednia.setText("Twoja srednia to: "+data.getExtras().getString("srednia"));
-    srednia.setVisibility(View.VISIBLE);
+        if (resultCode == 998) {
+            // Bundle tobolek=data.getExtras();
+            //String liczba=tobolek.getString("srednia");  //można przekazać więcej niż
+            // 1 element
+            System.out.println("fhfghf");
+            srednia.setText("Twoja srednia to: " + data.getExtras().getString("srednia"));
+            srednia.setVisibility(View.VISIBLE);
 
-}
+        }
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putString("srednia1",srednia.getText().toString());
+        outState.putString("srednia1", srednia.getText().toString());
         super.onSaveInstanceState(outState);
     }
 
