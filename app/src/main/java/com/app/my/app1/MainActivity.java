@@ -1,6 +1,7 @@
 package com.app.my.app1;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -157,8 +158,15 @@ public class MainActivity extends AppCompatActivity {
             // Bundle tobolek=data.getExtras();
             //String liczba=tobolek.getString("srednia");  //można przekazać więcej niż
             // 1 element
-            System.out.println("fhfghf");
+            //System.out.println("powrót");
             srednia.setText("Twoja srednia to: " + data.getExtras().getString("srednia"));
+            if (Float.parseFloat(data.getExtras().getString("srednia")) >= 2) {
+                srednia.setTextColor(Color.GREEN);
+                Toast.makeText(getBaseContext(), "Pozytywna średnia", Toast.LENGTH_SHORT).show();
+            } else {
+                srednia.setTextColor(Color.RED);
+                Toast.makeText(getBaseContext(), "Nie zaliczono", Toast.LENGTH_SHORT).show();
+            }
             srednia.setVisibility(View.VISIBLE);
 
         }
@@ -167,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putString("srednia1", srednia.getText().toString());
+        outState.putInt("colorOfSrednia", srednia.getTextColors().getDefaultColor());
         super.onSaveInstanceState(outState);
     }
 
@@ -174,7 +183,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         srednia.setText(savedInstanceState.getString("srednia1"));
-        srednia.setVisibility(View.VISIBLE);
+        srednia.setTextColor(savedInstanceState.getInt("colorOfSrednia"));
+        if (!srednia.getText().equals("Srednia")) {
+            if (srednia.getVisibility() == View.INVISIBLE)
+                srednia.setVisibility(View.VISIBLE);
+
+        }
     }
 
 }

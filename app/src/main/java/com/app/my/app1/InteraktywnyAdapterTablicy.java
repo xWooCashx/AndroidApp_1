@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ public class InteraktywnyAdapterTablicy extends ArrayAdapter<ModelOceny> {
     //przechowujemy referencję do listy ocen
     private List<ModelOceny> listaOcen;
     private Activity kontekst;
+    ProgressBar progressBarOceny;
 
     public InteraktywnyAdapterTablicy(Activity kontekst, List<ModelOceny> listaOcen) {
         super(kontekst, R.layout.ocena, listaOcen);
@@ -33,6 +35,8 @@ public class InteraktywnyAdapterTablicy extends ArrayAdapter<ModelOceny> {
             //utworzenie layout na podstawie pliku XML
             LayoutInflater pompka = kontekst.getLayoutInflater();
             widok = pompka.inflate(R.layout.ocena, null);
+
+            progressBarOceny= kontekst.findViewById(R.id.progressBar);
             //wybranie konkretnego przycisku radiowego musi zmieniać dane w modelu
             RadioGroup grupaOceny = (RadioGroup) widok.findViewById(R.id.grupaOceny);
             grupaOceny.setTag(listaOcen.get(numerWiersza));
@@ -49,6 +53,9 @@ public class InteraktywnyAdapterTablicy extends ArrayAdapter<ModelOceny> {
                             ModelOceny element = (ModelOceny) group.getTag();
                             // 2) zapisanie zmienionej oceny
                             //System.out.println(numerWiersza);
+                                if(element.getOcena()==0)
+                                progressBarOceny.incrementProgressBy(1);
+
                             switch (checkedId) {
                                 case R.id.ocena1:
                                     element.setOcena(1);

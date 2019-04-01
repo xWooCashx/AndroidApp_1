@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Main2Activity extends AppCompatActivity {
 
     ArrayList dane;
     ListView listaOcen;
+    ProgressBar progressBarOceny;
     int liczbaOcen;
     float srednia = 0;
     Button oblicz;
@@ -29,6 +31,8 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         dane = new ArrayList<ModelOceny>();
         liczbaOcen = getIntent().getExtras().getInt("liczbaOcen");
+        progressBarOceny= findViewById(R.id.progressBar);
+        progressBarOceny.setMax(liczbaOcen);
         for (int i = 1; i <= liczbaOcen; i++) {
             dane.add(new ModelOceny("ocena " + i));
         }
@@ -57,7 +61,7 @@ public class Main2Activity extends AppCompatActivity {
                     }
                     srednia /= liczbaOcen;
                     zamiar.putExtra("srednia", srednia + "");
-                    System.out.println(srednia);
+                    //System.out.println(srednia);
                     setResult(998, zamiar);
                     finish();
                 } else
@@ -74,12 +78,9 @@ public class Main2Activity extends AppCompatActivity {
         for (int i = 0; i < liczbaOcen; i++) {
             oceny[i] = ((ModelOceny) dane.get(i)).getOcena();
         }
-//        for (Object ocena : dane) {
-//            oceny.add(((ModelOceny)ocena).getOcena());
-//        }
         outState.putIntArray("oceny", oceny);
         super.onSaveInstanceState(outState);
-        System.out.println("zapisano oceny");
+        //System.out.println("zapisano oceny");
     }
 
     @Override
@@ -91,7 +92,7 @@ public class Main2Activity extends AppCompatActivity {
             ((ModelOceny) ocena).setOcena(oceny[i]);
             i++;
         }
-        System.out.println("wczytano oceny");
+        //System.out.println("wczytano oceny");
     }
 
 }
