@@ -1,6 +1,7 @@
 package com.app.my.app1;
 
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     boolean czyImie=false,czyNazwisko=false,czyLiczby=false;
     EditText imie,nazwisko,liczbaOcen;
-
+    TextView srednia;
     Button oblicz;
     protected void pokazOblicz(){
 if(czyImie && czyNazwisko && czyLiczby)
@@ -29,6 +30,8 @@ else
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+         srednia = findViewById(R.id.srednia);
         oblicz = (Button) findViewById(R.id.oblicz);
         oblicz.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,10 +161,23 @@ if(resultCode==998) {
     //String liczba=tobolek.getString("srednia");  //można przekazać więcej niż
     // 1 element
     System.out.println("fhfghf");
-    TextView srednia = findViewById(R.id.srednia);
      srednia.setText("Twoja srednia to: "+data.getExtras().getString("srednia"));
     srednia.setVisibility(View.VISIBLE);
 
 }
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString("srednia1",srednia.getText().toString());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        srednia.setText(savedInstanceState.getString("srednia1"));
+        srednia.setVisibility(View.VISIBLE);
+    }
+
 }
