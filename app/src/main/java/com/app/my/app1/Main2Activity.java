@@ -31,19 +31,21 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         dane = new ArrayList<ModelOceny>();
         liczbaOcen = getIntent().getExtras().getInt("liczbaOcen");
-        progressBarOceny= findViewById(R.id.progressBar);
+        //USTAWIENIE MAX PROGRESSBARU
+        progressBarOceny = findViewById(R.id.progressBar);
         progressBarOceny.setMax(liczbaOcen);
         for (int i = 1; i <= liczbaOcen; i++) {
             dane.add(new ModelOceny("ocena " + i));
         }
         InteraktywnyAdapterTablicy adapter = new InteraktywnyAdapterTablicy(this, dane);
         listaOcen = (ListView) findViewById(R.id.listaOcen);
-
+        //DODANIE STOPKI
         View footerView = ((LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer, null, false);
         listaOcen.addFooterView(footerView);
         listaOcen.setAdapter(adapter);
 
         oblicz = (Button) findViewById(R.id.obliczSrednia);
+        //AKCJA PO NACISNIECIU
         oblicz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,27 +74,31 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
+    //PRZED OBROCENIEM
     @Override
     public void onSaveInstanceState(Bundle outState) {
         int[] oceny = new int[dane.size()];
+        System.out.println("zapisano oceny");
         for (int i = 0; i < liczbaOcen; i++) {
             oceny[i] = ((ModelOceny) dane.get(i)).getOcena();
+            //System.out.println(oceny[i]);
         }
         outState.putIntArray("oceny", oceny);
         super.onSaveInstanceState(outState);
-        //System.out.println("zapisano oceny");
     }
 
+    //PO OBROCENIU
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         int[] oceny = savedInstanceState.getIntArray("oceny");
+        System.out.println("wczytano oceny");
         int i = 0;
         for (Object ocena : dane) {
             ((ModelOceny) ocena).setOcena(oceny[i]);
             i++;
+            //System.out.println(((ModelOceny) ocena).getOcena());
         }
-        //System.out.println("wczytano oceny");
     }
 
 }

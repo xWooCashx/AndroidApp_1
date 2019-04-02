@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     EditText imie, nazwisko, liczbaOcen;
     TextView srednia;
     Button oblicz;
-
+//SPRAWDZENIE WARUNKOW WYSWIETLENIA PRZYCISKU
     protected void pokazOblicz() {
         if (czyImie && czyNazwisko && czyLiczby)
             oblicz.setVisibility(Button.VISIBLE);
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+        //CZY NIE JEST PUSTE
         nazwisko = (EditText) findViewById(R.id.nazwiskoInput);
         nazwisko.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                                               @Override
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+            //SPRWADZENIE CZY NIE JEST PUSTE
             @Override
             public void afterTextChanged(Editable s) {
                 //s.toString();
@@ -109,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+        //SPRAWDZENIE CZY NIE JEST PUSTE
         liczbaOcen = (EditText) findViewById(R.id.liczbaOcenInput);
         liczbaOcen.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                                                 @Override
@@ -131,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+            //UZYSKANIE LICZBY Z NUMBERTEXT
             @Override
             public void afterTextChanged(Editable s) {
                 int liczba = 0;
@@ -150,15 +154,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //PO POWROCIE Z AKTYWNOSCI 2
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == 998) {
-            // Bundle tobolek=data.getExtras();
-            //String liczba=tobolek.getString("srednia");  //można przekazać więcej niż
-            // 1 element
-            //System.out.println("powrót");
+
             srednia.setText("Twoja srednia to: " + data.getExtras().getString("srednia"));
             if (Float.parseFloat(data.getExtras().getString("srednia")) >= 2) {
                 srednia.setTextColor(Color.GREEN);
@@ -172,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //PRZED OBROCENIEM
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putString("srednia1", srednia.getText().toString());
@@ -179,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    //PO OBROCENIU
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);

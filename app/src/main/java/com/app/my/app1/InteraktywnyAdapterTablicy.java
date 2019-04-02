@@ -53,6 +53,7 @@ public class InteraktywnyAdapterTablicy extends ArrayAdapter<ModelOceny> {
                             ModelOceny element = (ModelOceny) group.getTag();
                             // 2) zapisanie zmienionej oceny
                             //System.out.println(numerWiersza);
+                            //ZWIEKSZENIE PROGRESU
                                 if(element.getOcena()==0)
                                 progressBarOceny.incrementProgressBy(1);
 
@@ -92,19 +93,19 @@ public class InteraktywnyAdapterTablicy extends ArrayAdapter<ModelOceny> {
         RadioGroup grupaOceny = (RadioGroup) widok.findViewById(R.id.grupaOceny);
         //zaznaczenie odpowiedniego przycisku na podtawie modelu
         switch (listaOcen.get(numerWiersza).getOcena()) {
-            case 5:
+            case 1:
                 grupaOceny.check(R.id.ocena1);
                 break;
-            case 4:
+            case 2:
                 grupaOceny.check(R.id.ocena2);
                 break;
             case 3:
                 grupaOceny.check(R.id.ocena3);
                 break;
-            case 2:
+            case 4:
                 grupaOceny.check(R.id.ocena4);
                 break;
-            case 1:
+            case 5:
                 grupaOceny.check(R.id.ocena5);
                 break;
         }
